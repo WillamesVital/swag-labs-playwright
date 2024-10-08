@@ -8,7 +8,13 @@ test.describe('Login', () => {
     await loginPage.openSite();
   });
 
-  test('CT01 - Verificar que é possível efetuar login com sucesso', async ({ page }) => {
+  test('CT01 - Verificar que é possível efetuar login com sucesso', {
+     tag: '@fast',
+  }, async ({ page }, testInfo ) => {
+    test.info().annotations.push({
+      type: "New Automation",
+      description: "https://jira.com/BUG-1234",
+    });
     const loginPage = new LoginPage(page);
 
     await test.step('Quando o usuário preenche o nome de usuário com "standard_user" e a senha com "secret_sauce"', async () => {
@@ -23,6 +29,10 @@ test.describe('Login', () => {
     await test.step('Então o usuário é redirecionado para a página inicial', async () => {
       const title = await loginPage.getTitle();
       expect(title).toBe('Swag Labs');
+
+      await testInfo.attach('title', {
+        body: title
+      });
 
       await page.waitForTimeout(3000);
     });
