@@ -10,8 +10,8 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     env:
-      PROD_URL: 'https://www.saucedemo.com'
-      QAS_URL: 'https://www.saucedemoqa.com'
+      PROD_URL: PROD_URL
+      QAS_URL: QAS_URL
     steps:
     - name: Get code
       uses: actions/checkout@v4
@@ -28,7 +28,7 @@ jobs:
       run: npx playwright install --with-deps
 
     - name: Run Playwright tests
-      run: PROD_URL = ${{ env.PROD_URL }} npx playwright test & QAS_URL = ${{ env.QAS_URL }} npx playwright test
+      run: npx playwright test
 
     - name: Publish HTML report 
       uses: actions/upload-artifact@v4
