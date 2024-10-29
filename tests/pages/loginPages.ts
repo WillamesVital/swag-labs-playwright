@@ -7,7 +7,7 @@ export class LoginPage {
   constructor(private page: Page) {}
 
   async openSite() {
-    await this.page.goto('/', { waitUntil: 'load' });
+    await this.page.goto(global.BASE_URL, { waitUntil: 'load' });
   }
 
   async fillUsername(username: string) {

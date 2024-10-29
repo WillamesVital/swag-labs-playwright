@@ -7,7 +7,7 @@ import { defineConfig, devices } from '@playwright/test';
 // import dotenv from 'dotenv';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
 Object.assign(global, {
-  PROD_URL: process.env.PROD || 'https://www.saucedemo.com',
+  PROD_URL: process.env.BASE_URL || 'https://www.saucedemo.com',
   QAS_URL: process.env.BASE_URL || 'https://www.saucedemoqa.com',
 });
 

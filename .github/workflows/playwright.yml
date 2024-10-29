@@ -10,8 +10,8 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     env:
-      PROD_URL: PROD_URL
-      QAS_URL: QAS_URL
+      PROD_URL: ${{ secrets.PROD_URL }}
+      QAS_URL: ${{ secrets.QAS_URL }}
     steps:
     - name: Get code
       uses: actions/checkout@v4
@@ -29,6 +29,11 @@ jobs:
 
     - name: Run Playwright tests
       run: npx playwright test
+
+    - name: Debug Environment Variables
+      run: |
+        echo "PROD_URL: $PROD_URL"
+        echo "QAS_URL: $QAS_URL"
 
     - name: Publish HTML report 
       uses: actions/upload-artifact@v4
