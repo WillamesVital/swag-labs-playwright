@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PROD_URL: 'https://www.saucedemo.com'
-      BASE_URL: 'https://www.saucedemoqa.com'
+      QAS_URL: 'https://www.saucedemoqa.com'
     steps:
     - name: Get code
       uses: actions/checkout@v4
@@ -28,7 +28,7 @@ jobs:
       run: npx playwright install --with-deps
 
     - name: Run Playwright tests
-      run: npx playwright test
+      run: PROD_URL = ${{ env.PROD_URL }} npx playwright test & QAS_URL = ${{ env.QAS_URL }} npx playwright test
 
     - name: Publish HTML report 
       uses: actions/upload-artifact@v4
