@@ -13,10 +13,14 @@ jobs:
       PROD_URL: ${{ secrets.PROD_URL }}
       QAS_URL: ${{ secrets.QAS_URL }}
     steps:
-    - name: Get code
+    - name: Definir variáveis de ambiente
+      run: |
+        echo "PROD_URL=${{ secrets.PROD_URL }}" >> $GITHUB_ENV
+        echo "QAS_URL=${{ secrets.QAS_URL }}" >> $GITHUB_ENV
+    - name: Obter código
       uses: actions/checkout@v4
 
-    - name: Install Node.js
+    - name: Instalar Node.js
       uses: actions/setup-node@v4
       with:
         node-version: lts/*
