@@ -1,17 +1,14 @@
 name: Playwright Tests
 
 on:
-  push:                # Executa o workflow em todos os pushs
+  push:             # Executa o workflow em todos os pushs
     branches: 
-      - main           # Especifica a branch "main" (ou outra de sua escolha)
+      - main # Especifica a branch "main" (ou outra de sua escolha)
   pull_request:        # Executa o workflow em todos os pull requests para a branch "main"
     branches: 
       - main
-  workflow_dispatch:   # Permite disparar o workflow manualmente
-    inputs:
-      site_url:
-        description: 'URL do site'
-        required: false
+  workflow_dispatch:
+
 
 jobs:
   e2e-tests:
@@ -27,7 +24,7 @@ jobs:
           echo "SITE_URL=https://www.saucedemo.com/ >> $GITHUB_ENV
         else
           echo "SITE_URL=${{ github.event.inputs.SITE_URL }}" >> $GITHUB_ENV
-        fi
+        if
 
     - name: Install Node.js
       uses: actions/setup-node@v4
