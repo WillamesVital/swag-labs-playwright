@@ -16,7 +16,13 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Definir variável de ambiente SITE_URL
-      run: echo "SITE_URL=${{ github.event.inputs.SITE_URL }}" >> $GITHUB_ENV
+      run: |
+        # Definir URL padrão se site_url não for fornecido
+        if [[ -z "${{ github.event.inputs.site_url }}" ]]; then
+          echo "SITE_URL=https://www.saucedemo.com" >> $GITHUB_ENV
+        else
+          echo "SITE_URL=${{ github.event.inputs.site_url }}" >> $GITHUB_ENV
+        fi
 
     - name: Install Node.js
       uses: actions/setup-node@v4
