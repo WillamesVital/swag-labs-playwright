@@ -9,18 +9,11 @@ jobs:
   e2e-tests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    env:
-      PROD_URL: ${{ secrets.PROD_URL }}
-      QAS_URL: ${{ secrets.QAS_URL }}
     steps:
-    - name: Definir variáveis de ambiente
-      run: |
-        echo "PROD_URL=${{ secrets.PROD_URL }}" >> $GITHUB_ENV
-        echo "QAS_URL=${{ secrets.QAS_URL }}" >> $GITHUB_ENV
-    - name: Obter código
+    - name: Get code
       uses: actions/checkout@v4
 
-    - name: Instalar Node.js
+    - name: Install Node.js
       uses: actions/setup-node@v4
       with:
         node-version: lts/*
@@ -33,11 +26,6 @@ jobs:
 
     - name: Run Playwright tests
       run: npx playwright test
-
-    - name: Debug Environment Variables
-      run: |
-        echo "PROD_URL: $PROD_URL"
-        echo "QAS_URL: $QAS_URL"
 
     - name: Publish HTML report 
       uses: actions/upload-artifact@v4
