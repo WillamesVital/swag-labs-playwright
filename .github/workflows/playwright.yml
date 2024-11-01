@@ -1,7 +1,13 @@
 name: Playwright Tests
 
 on:
-  workflow_dispatch:
+  push:                # Executa o workflow em todos os pushs
+    branches: 
+      - main           # Especifica a branch "main" (ou outra de sua escolha)
+  pull_request:        # Executa o workflow em todos os pull requests para a branch "main"
+    branches: 
+      - main
+  workflow_dispatch:   # Permite disparar o workflow manualmente
     inputs:
       site_url:
         description: 'URL do site'
@@ -17,11 +23,10 @@ jobs:
 
     - name: Definir variável de ambiente SITE_URL
       run: |
-        # Definir URL padrão se site_url não for fornecido
         if [[ -z "${{ github.event.inputs.site_url }}" ]]; then
-          echo "SITE_URL=https://www.saucedemo.com" >> $GITHUB_ENV
+          echo "SITE_URL=https://www.saucedemo.com/ >> $GITHUB_ENV
         else
-          echo "SITE_URL=${{ github.event.inputs.site_url }}" >> $GITHUB_ENV
+          echo "SITE_URL=${{ github.event.inputs.SITE_URL }}" >> $GITHUB_ENV
         fi
 
     - name: Install Node.js
