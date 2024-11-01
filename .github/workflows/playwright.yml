@@ -20,8 +20,8 @@ jobs:
 
     - name: Definir variável de ambiente SITE_URL
       run: |
-        if [[ -z "${{ github.event.inputs.site_url }}" ]]; then
-          echo "SITE_URL=https://www.saucedemo.com/ >> $GITHUB_ENV
+        if [[ -z "${{ github.event.inputs.SITE_URL }}" ]]; then
+          echo "SITE_URL=https://www.saucedemo.com >> $GITHUB_ENV
         else
           echo "SITE_URL=${{ github.event.inputs.SITE_URL }}" >> $GITHUB_ENV
         if
